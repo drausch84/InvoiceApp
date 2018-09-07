@@ -128,7 +128,7 @@ class InvoiceTable extends React.Component{
           <td colSpan="6" />
           <th>
             <h4>
-             Grand Total
+            ${this.lineTotal()}
             </h4>
           </th>
           <td>
