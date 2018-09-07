@@ -125,7 +125,7 @@ class InvoiceTable extends React.Component{
     return (
       <tfoot>
         <tr>
-          <td colSpan="6" />
+          <td colSpan="4" />
           <th>
             <h4>
             ${this.lineTotal()}
