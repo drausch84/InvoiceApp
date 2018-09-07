@@ -6,6 +6,13 @@ import registerServiceWorker from './registerServiceWorker';
 import { FaTrash, FaPlus} from "react-icons/fa";
 
 class TableItems extends React.Component{
+
+    lineTotal() {
+        var { price, amount } = this.props;
+        var itemPrice = parseFloat(price);
+        var itemAmount = parseFloat(amount);
+        return isNaN(itemPrice) || isNaN(itemAmount) ? 0 : itemPrice * itemAmount;
+      }
         render() {
             return (
              
