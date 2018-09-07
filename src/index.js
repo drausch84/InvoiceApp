@@ -51,6 +51,10 @@ class TableItems extends React.Component{
 
 
 class InvoiceTable extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = { line_items: [{ price: "", amount: "" }] };
+    }
   tableHeader() {
     return (
       <thead>
