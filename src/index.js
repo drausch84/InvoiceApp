@@ -68,6 +68,7 @@ class InvoiceTable extends React.Component{
         this.state = { table_items: [{ price: "", amount: "" }] };
         this.priceChanged = this.priceChanged.bind(this);
         this.amountChanged = this.amountChanged.bind(this);
+        this.addLineItem = this.addLineItem.bind(this);
     }
 
     priceChanged(index, event) {
@@ -86,6 +87,11 @@ class InvoiceTable extends React.Component{
         var itemPrice = parseFloat(price);
         var itemAmount = parseFloat(amount);
         return isNaN(itemPrice) || isNaN(itemAmount) ? 0 : itemPrice * itemAmount;
+      }
+      addLine(event) {
+        var { table_items } = this.state;
+        table_items.push({ price: "", amount: "" });
+        this.setState({ table_items });
       }
   tableHeader() {
     return (
@@ -114,7 +120,7 @@ class InvoiceTable extends React.Component{
             </h4>
           </th>
           <td>
-            <button className="btn btn-success">
+            <button className="btn btn-success" onClick={this.addLine} >
               <FaPlus />
             </button>
           </td>
