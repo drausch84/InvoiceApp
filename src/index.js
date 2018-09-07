@@ -26,11 +26,11 @@ class TableItems extends React.Component{
                 <td>
                   <div className="input-group">
                     <div className="input-group-addon">$</div>
-                        <input name="price" className = "form-control" />
+                        <input name="price" className = "form-control" value = {price} />
                     </div>
                 </td>
                 <td>
-                    <input name="amount" className="form-control" />
+                    <input name="amount" className="form-control" value = {amount} />
                 </td>
                 <td>
                   <h4>
