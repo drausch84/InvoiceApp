@@ -14,6 +14,14 @@ class TableItems extends React.Component{
         return isNaN(itemPrice) || isNaN(itemAmount) ? 0 : itemPrice * itemAmount;
       }
         render() {
+            var {
+                
+                price,
+                priceChanged,
+                amount,
+                amountChanged,
+                
+              } = this.props;
             return (
              
               <tr>
@@ -26,15 +34,15 @@ class TableItems extends React.Component{
                 <td>
                   <div className="input-group">
                     <div className="input-group-addon">$</div>
-                        <input name="price" className = "form-control" value = {price} />
+                        <input name="price" className = "form-control" value = {price} onChange={priceChanged}/>
                     </div>
                 </td>
                 <td>
-                    <input name="amount" className="form-control" value = {amount} />
+                    <input name="amount" className="form-control" value = {amount} onChange={amountChanged}/>
                 </td>
                 <td>
                   <h4>
-                   
+                    ${this.lineTotal()}
                   </h4>
                 </td>
                 <td>
@@ -53,8 +61,21 @@ class TableItems extends React.Component{
 class InvoiceTable extends React.Component{
     constructor(props) {
         super(props);
-        this.state = { line_items: [{ price: "", amount: "" }] };
+        this.state = { table_items: [{ price: "", amount: "" }] };
+        this.priceChanged = this.priceChanged.bind(this);
+        this.amountChanged = this.amountChanged.bind(this);
     }
+
+    priceChanged(event) {
+        var { table_items } = this.state;
+        this.setState({ table_items });
+      }
+    
+      amountChanged(event) {
+        var { table_items } = this.state;
+        
+        this.setState({ table_items });
+      }
   tableHeader() {
     return (
       <thead>
@@ -106,6 +127,8 @@ render(){
                 <TableItems 
                     price = {this.state.price}
                     amount = {this.state.amount}
+                    priceChanged={this.priceChanged}
+                    amountChanged={this.amountChanged}
                 />
 
             </tbody>
