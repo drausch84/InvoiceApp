@@ -13,9 +13,13 @@ class TableItems extends React.Component{
         var itemAmount = parseFloat(amount);
         return isNaN(itemPrice) || isNaN(itemAmount) ? 0 : itemPrice * itemAmount;
       }
+
+      itemNumber() {
+        return parseInt(this.props.index) + 1;
+      }
         render() {
             var {
-                
+                index,
                 price,
                 priceChanged,
                 amount,
@@ -26,7 +30,7 @@ class TableItems extends React.Component{
              
               <tr>
                 <td>
-                  1.
+                  {this.itemNumber}
                 </td>
                 <td>
                   <input name="item-name" className="form-control" />
@@ -34,11 +38,11 @@ class TableItems extends React.Component{
                 <td>
                   <div className="input-group">
                     <div className="input-group-addon">$</div>
-                        <input name="price" className = "form-control" value = {price} onChange={priceChanged}/>
+                        <input name="price" className = "form-control" value = {price} onChange={priceChanged.bind(null, index)}/>
                     </div>
                 </td>
                 <td>
-                    <input name="amount" className="form-control" value = {amount} onChange={amountChanged}/>
+                    <input name="amount" className="form-control" value = {amount} onChange={amountChanged.bind(null, index)}/>
                 </td>
                 <td>
                   <h4>
@@ -66,14 +70,15 @@ class InvoiceTable extends React.Component{
         this.amountChanged = this.amountChanged.bind(this);
     }
 
-    priceChanged(event) {
+    priceChanged(index, event) {
         var { table_items } = this.state;
+        table_items[index].price = event.target.value;
         this.setState({ table_items });
       }
     
-      amountChanged(event) {
+      amountChanged(index, event) {
         var { table_items } = this.state;
-        
+        table_items[index].amount = event.target.value;
         this.setState({ table_items });
       }
   tableHeader() {
@@ -125,6 +130,7 @@ render(){
             {this.tableHeader()}
             <tbody>
                 <TableItems 
+                    index={index}
                     price = {this.state.price}
                     amount = {this.state.amount}
                     priceChanged={this.priceChanged}
