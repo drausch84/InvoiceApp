@@ -103,7 +103,11 @@ render(){
           
             {this.tableHeader()}
             <tbody>
-                <TableItems />
+                <TableItems 
+                    price = {this.state.price}
+                    amount = {this.state.amount}
+                />
+
             </tbody>
             {this.tableFooter()}
          </table>
