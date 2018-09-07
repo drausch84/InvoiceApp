@@ -81,6 +81,12 @@ class InvoiceTable extends React.Component{
         table_items[index].amount = event.target.value;
         this.setState({ table_items });
       }
+
+      totalPrice(price, amount) {
+        var itemPrice = parseFloat(price);
+        var itemAmount = parseFloat(amount);
+        return isNaN(itemPrice) || isNaN(itemAmount) ? 0 : itemPrice * itemAmount;
+      }
   tableHeader() {
     return (
       <thead>
@@ -118,7 +124,20 @@ class InvoiceTable extends React.Component{
   }
 
 render(){
-
+  
+        var table_items = [];
+        for (var index in this.state.table_items) {
+          table_items.push(
+            <TableItems
+              index={index}
+              price={this.state.table_items[index].price}
+              amount={this.state.table_items[index].amount}
+              priceChanged={this.priceChanged}
+              amountChanged={this.amountChanged}
+              
+            />
+          );
+        }
     return (
         <div>
           <h1>Invoice Application</h1>
@@ -129,14 +148,7 @@ render(){
           
             {this.tableHeader()}
             <tbody>
-                <TableItems 
-                    index={index}
-                    price = {this.state.price}
-                    amount = {this.state.amount}
-                    priceChanged={this.priceChanged}
-                    amountChanged={this.amountChanged}
-                />
-
+                {table_items}
             </tbody>
             {this.tableFooter()}
          </table>
