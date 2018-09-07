@@ -3,3 +3,15 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.table thead th {
+  background: lightblue;
+  font-family:monospace;
+  font-size:1.5em;
+}
+.btn{
+  padding:10px;
+  border-radius:36%;
+}
+h1{
+  color:black;
+}

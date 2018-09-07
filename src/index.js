@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 import { FaTrash, FaPlus} from "react-icons/fa";
 
 class TableItems extends React.Component{
@@ -24,13 +22,14 @@ class TableItems extends React.Component{
                 priceChanged,
                 amount,
                 amountChanged,
+                deleteLine
                 
               } = this.props;
             return (
              
               <tr>
                 <td>
-                  {this.itemNumber}
+                  {this.itemNumber()}
                 </td>
                 <td>
                   <input name="item-name" className="form-control" />
@@ -50,7 +49,7 @@ class TableItems extends React.Component{
                   </h4>
                 </td>
                 <td>
-                  <button className="btn btn-danger">
+                  <button className="btn btn-danger"  onClick={deleteLine.bind(null, index)}>
                    <FaTrash/>
                   </button>
                 </td>
@@ -68,7 +67,8 @@ class InvoiceTable extends React.Component{
         this.state = { table_items: [{ price: "", amount: "" }] };
         this.priceChanged = this.priceChanged.bind(this);
         this.amountChanged = this.amountChanged.bind(this);
-        this.addLineItem = this.addLineItem.bind(this);
+        this.addLine = this.addLine.bind(this);
+        this.deleteLine = this.deleteLine.bind(this);
     }
 
     priceChanged(index, event) {
@@ -88,9 +88,21 @@ class InvoiceTable extends React.Component{
         var itemAmount = parseFloat(amount);
         return isNaN(itemPrice) || isNaN(itemAmount) ? 0 : itemPrice * itemAmount;
       }
+      lineTotal() {
+        var { table_items } = this.state;
+        return table_items
+          .map(i => this.totalPrice(i.price, i.amount))
+          .reduce((pv, cv) => pv + cv, 0);
+      }
+    
       addLine(event) {
         var { table_items } = this.state;
         table_items.push({ price: "", amount: "" });
+        this.setState({ table_items });
+      }
+      deleteLine(index, event) {
+        var { table_items } = this.state;
+        table_items.splice(index, 1);
         this.setState({ table_items });
       }
   tableHeader() {
@@ -140,7 +152,7 @@ render(){
               amount={this.state.table_items[index].amount}
               priceChanged={this.priceChanged}
               amountChanged={this.amountChanged}
-              
+              deleteLine = {this.deleteLine}
             />
           );
         }
@@ -150,7 +162,7 @@ render(){
           <p>This is a simple invoice application.  Fill out the information such as item name, price, and quantity to get a total price.  You can use the green button
             to add a new item row.  You can also use the red button to delete a row.  Each row's price total will be added to a grand total at the bottom of the table.
           </p>
-          <table className="app-table">
+          <table className="table table-bordered table-hover">
           
             {this.tableHeader()}
             <tbody>
@@ -165,5 +177,5 @@ render(){
   
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(<InvoiceTable />, document.getElementById('root'));
+
