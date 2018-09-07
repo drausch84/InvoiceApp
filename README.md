@@ -7,8 +7,11 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Technology Used
 React.js
+
 CSS
+
 Bootstrap
+
 React-Icons npm
 
 ## What does it do?
