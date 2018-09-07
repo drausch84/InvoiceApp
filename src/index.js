@@ -44,7 +44,7 @@ class TableItems extends React.Component{
 
 
 class InvoiceTable extends React.Component{
-  table() {
+  tableHeader() {
     return (
       <thead>
         <tr>
@@ -58,7 +58,27 @@ class InvoiceTable extends React.Component{
       </thead>
     );
   }
-    
+
+
+  tableFooter() {
+    return (
+      <tfoot>
+        <tr>
+          <td colSpan="6" />
+          <th>
+            <h4>
+             Grand Total
+            </h4>
+          </th>
+          <td>
+            <button className="btn btn-success">
+              <FaPlus />
+            </button>
+          </td>
+        </tr>
+      </tfoot>
+    );
+  }
 }
 
 
