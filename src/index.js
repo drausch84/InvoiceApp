@@ -6,12 +6,41 @@ import registerServiceWorker from './registerServiceWorker';
 import { FaTrash, FaPlus} from "react-icons/fa";
 
 class TableItems extends React.Component{
-    render(){
-        return 
-            
+        render() {
+            return (
+             
+              <tr>
+                <td>
+                  1.
+                </td>
+                <td>
+                  <input name="item-name" className="form-control" />
+                </td>
+                <td>
+                  <div className="input-group">
+                    <div className="input-group-addon">$</div>
+                        <input name="price" className = "form-control" />
+                    </div>
+                </td>
+                <td>
+                    <input name="amount" className="form-control" />
+                </td>
+                <td>
+                  <h4>
+                   
+                  </h4>
+                </td>
+                <td>
+                  <button className="btn btn-danger">
+                   <FaTrash/>
+                  </button>
+                </td>
+              </tr>
+            );
         
         }
     }
+
 
 
 class InvoiceTable extends React.Component{
