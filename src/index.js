@@ -44,10 +44,21 @@ class TableItems extends React.Component{
 
 
 class InvoiceTable extends React.Component{
-    render(){
-        return
-        <div>Invoice Table</div>
-    }
+  table() {
+    return (
+      <thead>
+        <tr>
+          <th width="5%">Nr</th>
+          <th width="40%">Name</th>
+          <th width="20%">Price</th>
+          <th width="20%">Amount</th>
+          <th width="10%">Total</th>
+          <th width="5%">Action</th>
+        </tr>
+      </thead>
+    );
+  }
+    
 }
 
 
