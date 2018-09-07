@@ -88,14 +88,14 @@ render(){
           <p>This is a simple invoice application.  Fill out the information such as item name, price, and quantity to get a total price.  You can use the green button
             to add a new item row.  You can also use the red button to delete a row.  Each row's price total will be added to a grand total at the bottom of the table.
           </p>
-        <table className="app-table">
+          <table className="app-table">
           
-          {this.tableHeader()}
-          <tbody>
-            <TableItems />
-          </tbody>
-          {this.tableFooter()}
-        </table>
+            {this.tableHeader()}
+            <tbody>
+                <TableItems />
+            </tbody>
+            {this.tableFooter()}
+         </table>
         </div>
       );
     }
